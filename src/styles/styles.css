@@ -1,0 +1,268 @@
+@charset "UTF-8";
+/*Обнуление*/
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*, *:before, *:after {
+   -moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box; 
+}
+
+:focus, :active {
+  outline: none;
+}
+
+a:focus, a:active {
+  outline: none;
+}
+
+nav, footer, header, aside {
+  display: block;
+}
+
+html, body {
+
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+
+  font-family: Arial, Helvetica, sans-serif;
+  color: #000000;
+}
+
+input, button, textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a, a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: 400;
+}
+
+
+/*--------------------*/
+
+.title {
+  margin: 20px 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+
+  font-size: 30px;
+  text-align: center;
+}
+
+.main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 500px;
+  width: 800px;
+
+  border-radius: 15px;
+  background-color: aquamarine;
+  box-shadow: 0px 0px 8px 3px rgba(0,0,0,0.28);
+-webkit-box-shadow: 0px 0px 8px 3px rgba(0,0,0,0.28);
+-moz-box-shadow: 0px 0px 8px 3px rgba(0,0,0,0.28);
+  opacity: 0.90;
+}
+
+.header {
+  margin-bottom: auto;
+  padding: 5px 10px;
+}
+
+.header__question {
+  margin: 0px 0px 0px 5px;
+
+  font-size: 2rem;
+  /* font-family: 'Roboto', sans-serif; */
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+
+.header__answers {
+  margin: 20px 5px;
+  /* min-height: 300px; */
+}
+
+.answer-lable {
+  display: flex;
+  align-items: center;
+
+  margin: 5px 0;
+  padding: 20px 10px;
+  background-color: azure;
+  border-radius: 5px;
+}
+
+.answer-leter {
+  text-transform: uppercase;
+  margin-right:10px;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.answer {
+}
+
+/* ---------------- */
+
+.footer {
+  padding: 30px 0px 0px 0px;  
+}
+
+.select-answers-variable {
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.footer__left-container {
+  padding: 0px 0px 20px 10px;
+}
+.choices-table {
+  
+}
+.choices-table__row {
+  
+}
+.choices-table__th {
+}
+.choice {
+}
+
+.select-answers-title {
+  padding: 10px 0px;
+
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.checkbox {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.checkbox-lable {
+  display: block;
+  position: relative;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.checkbox-lable:hover {
+  box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.15);
+}
+
+.checkbox-lable::before {
+  content: '';
+  position: relative;
+  display: inline-block;
+  /* margin-right: 10px; */
+  width: 30px;
+  height: 30px;
+  background: white;
+}
+
+.checkbox:checked + .checkbox-lable::after {
+  content: '✕';
+	speak: never; /* To be sure screen reader won't read "times" */
+	position: absolute;
+	top: 15px;
+	left: 3px;
+	font-size: 2.0625em;
+	color: #000000;
+	line-height: 0;
+  transition: all .2s; 
+}
+
+.footer__right-container {
+  padding: 0px 15px 10px 0px;
+}
+
+.btn {
+  height: 40px;
+  width: 150px;
+  margin: 4px;
+
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 2px;
+  box-shadow: 0px 0px 6px 2px rgba(0,0,0,0.28);
+  -webkit-box-shadow: 0px 0px 6px 2px rgba(0,0,0,0.28);
+  -moz-box-shadow: 0px 0px 6px 2px rgba(0,0,0,0.28);
+  opacity: 0.9;
+}
+
+.btn:hover {
+  opacity: 1;
+  transform: scale(1.015);
+}
+
+.view-result-btn {
+  color: #fff;
+  background-color: rgba(255, 0, 0, 0.788);
+}
+
+.next-btn {
+  color: #000;
+  background-color: #fff;
+}
+
+
+
+
+
+
