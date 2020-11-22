@@ -1,12 +1,14 @@
-import './styles/styles.css';
-// import Post from '@models/Questions';
-import QWESTIONS from './server/questions';
-import TestQuestions from './models/TestQuestions';
+import '@/styles/styles.css';
+import QWESTIONS from '@/server/questions';
+import TestQuestions from '@/models/TestQuestions';
 
 window.addEventListener('DOMContentLoaded', () => {
     
-    
-    const testQuestions = new TestQuestions('.questions-test-container', QWESTIONS, '.next');
+    const testQuestions = new TestQuestions({
+          testQuestionContainerSelector: '.questions-test-container', 
+          questions: QWESTIONS,
+          nextBtn: '.next-btn',
+    });
 
-    testQuestions.render();
+    testQuestions.init();
 });

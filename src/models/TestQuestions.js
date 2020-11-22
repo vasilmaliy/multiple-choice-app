@@ -1,15 +1,42 @@
+import {onListener} from '@/core/dom';
 export default class TestQuestions {
 
-    constructor( testQuestionContainerSelector, questions , nextQuestionsBtn = '') {
+    constructor({
+            testQuestionContainerSelector = null, 
+            questions = null,
+            nextBtn = null,
+        } = {}) {
         this.testQuestionContainer = document.querySelector(testQuestionContainerSelector);
         this.questions = questions;
-        this.nextQuestionsBtn = nextQuestionsBtn;
-        this.questionsIndex = 0;
+        this.questionsIndex = 1;
+        this.nextBtn = document.querySelector(nextBtn);
+    }
+
+    isNextQuestion() {
+        return this.questions.length > this.questionsIndex;
+    }
+
+    hideNextBtn() {
+        this.nextBtn.style.display = 'none';
+    }
+    
+    onNextQuestion() {
+        this.questionsIndex += 1;
+  
+        if (this.isNextQuestion()) {
+            this.render();
+        } else {
+            this.hideNextBtn();
+        }
+    }
+
+    init() {
+        onListener(this.nextBtn, 'click', this.onNextQuestion.bind(this));
+        this.render();
     }
 
     render() {
-        
-        const currentQuestion = this.questions[this.questionsIndex];
+        const currentQuestion = this.questions[this.questionsIndex-1];
         const answers = [];
         
         for (let letter in currentQuestion.answers) {
@@ -28,7 +55,6 @@ export default class TestQuestions {
                 ${answers.join('')}
             </ul>
         `;
-
         this.testQuestionContainer.innerHTML = html;
     }
 }
