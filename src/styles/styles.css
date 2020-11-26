@@ -138,6 +138,10 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 5px;
 }
 
+.answer-lable--marked {
+  background-color: rgb(209, 209, 209);
+}
+
 .answer-leter {
   text-transform: uppercase;
   margin-right:10px;
@@ -145,8 +149,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.2rem;
 }
 
-.answer {
-}
+
 
 /* ---------------- */
 

@@ -1,14 +1,14 @@
 import '@/styles/styles.css';
 import QWESTIONS from '@/server/questions';
-import TestQuestions from '@/models/TestQuestions';
+import Screen from '@/models/Screen';
 
 window.addEventListener('DOMContentLoaded', () => {
     
-    const testQuestions = new TestQuestions({
-          testQuestionContainerSelector: '.questions-test-container', 
-          questions: QWESTIONS,
-          nextBtn: '.next-btn',
+    const screen = new Screen({
+        screenContainerSelector: '.questions-test-container', 
+        questions: QWESTIONS,
+        choicesContainerSelector: '.footer__left-container',
+        nextBtn: '.next-btn',
     });
-
-    testQuestions.init();
+    screen.init();
 });
