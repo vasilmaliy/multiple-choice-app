@@ -19,27 +19,51 @@ export default class Screen {
         this.screenContainer = document.querySelector(screenContainerSelector);
         this.questions = questions;
         this.nextBtn = document.querySelector(nextBtn);
-        this.currentQuestion = this.questions[this.state.index-1];
-
-        this.choices = new Choices(choicesContainerSelector);
+        this.choices = new Choices({
+            choicesContainerSelector: choicesContainerSelector,
+            questions: this.questions,
+            screen: this,
+        });
     }
 
-    markAnswer(event) {
-        const li = event.target.closest('li');
+    setAnswerToQuestion(answer) {
+        this.state.answer = answer
+    }
+
+    getQuestionIndex() {
+        return this.state.index;
+    }
+
+    getCurrentQuestion() {
+        return this.questions[this.getQuestionIndex()-1];
+    }
+
+    isCurrentAnswerSelected( answer ) {
+        return answer === this.state.answer;
+    }
+
+    markAnswer( event ) {
+        const label = event.target.closest('label');
         
-        if ( !li ) return;
+        if ( !label ) return;
          
-        for ( let elem of li.parentNode.children ) {
-            elem.classList.remove('answer-lable--marked');
+        for ( let answer of label.parentNode.children ) {
+            answer.classList.remove('answer-lable--marked');
         }
 
-        li.classList.add('answer-lable--marked');
-        this.state.answer = li.dataset.answer;
+        // remove answer if it already selected
+        if ( this.isCurrentAnswerSelected(label.dataset.answer) ) {
+            this.state.answer = null
+            
+        } 
+
+        label.classList.add('answer-lable--marked');
+        this.state.answer = label.dataset.answer;
     }
 
     checkAnswer() {
         
-        if ( this.currentQuestion.correctAnswer === this.state.answer ) {
+        if ( this.getCurrentQuestion().correctAnswer === this.state.answer ) {
             this.state.score += 1;
         }
     }
@@ -48,7 +72,6 @@ export default class Screen {
         this.checkAnswer();
 
         this.state.index += 1;
-        this.render();
 
         if ( this.isNextQuestion() ) {
              this.state.answer = null;
@@ -56,6 +79,7 @@ export default class Screen {
             this.state.complete = true;
             this.hideNextBtn();
         }
+        this.render();
     }
 
     isNextQuestion() {
@@ -75,26 +99,26 @@ export default class Screen {
     }
 
     render() {
-        this.currentQuestion = this.questions[this.state.index-1];
+        this.choices.render();
+
         const answers = [];
-        
-        for ( let letter in this.currentQuestion.answers ) {
+
+        for ( let letter in this.getCurrentQuestion().answers ) {
             
             answers.push(
-                `<li class="answer-lable" data-answer="${letter}">
+                `<label for="${letter}" class="answer-lable" data-answer="${letter}">
                     <span class="answer-leter">${letter}</span>
-                    <h4 class="answer">${this.currentQuestion.answers[letter]}</h4>
-                </li>`
+                    <h4 class="answer">${this.getCurrentQuestion().answers[letter]}</h4>
+                </label>`
             );
         }
 
         const html = `
-            <h4 class="header__question" id="question">${this.currentQuestion.question}</h4>
-            <ul class="header__answers">
+            <h4 class="header__question" id="question">${this.getCurrentQuestion().question}</h4>
+            <div class="header__answers">
                 ${answers.join('')}
-            </ul>
+            </div>
         `;
-
 
         this.screenContainer.innerHTML = html;
     }

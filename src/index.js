@@ -11,4 +11,5 @@ window.addEventListener('DOMContentLoaded', () => {
         nextBtn: '.next-btn',
     });
     screen.init();
+
 });
