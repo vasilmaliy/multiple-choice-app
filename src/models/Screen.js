@@ -26,8 +26,12 @@ export default class Screen {
         });
     }
 
-    setAnswerToQuestion(answer) {
-        this.state.answer = answer
+    setAnswer(answer) {
+        this.state.answer = answer;
+    }
+
+    getAnswer() {
+        return this.state.answer;
     }
 
     getQuestionIndex() {
@@ -38,27 +42,15 @@ export default class Screen {
         return this.questions[this.getQuestionIndex()-1];
     }
 
-    isCurrentAnswerSelected( answer ) {
-        return answer === this.state.answer;
-    }
-
     markAnswer( event ) {
         const label = event.target.closest('label');
         
         if ( !label ) return;
-         
-        for ( let answer of label.parentNode.children ) {
-            answer.classList.remove('answer-lable--marked');
-        }
-
-        // remove answer if it already selected
-        if ( this.isCurrentAnswerSelected(label.dataset.answer) ) {
-            this.state.answer = null
-            
-        } 
 
         label.classList.add('answer-lable--marked');
-        this.state.answer = label.dataset.answer;
+        setTimeout(function() {
+            label.classList.remove('answer-lable--marked');
+         }, 100, this);
     }
 
     checkAnswer() {
