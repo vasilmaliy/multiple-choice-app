@@ -9,24 +9,33 @@ export default class Choices {
         this.choicesContainer = document.querySelector(choicesContainerSelector);
         this.questions = questions;
         this.getCurrentQuestion = screen.getCurrentQuestion.bind(screen);
+        this.setAnswer = screen.setAnswer.bind(screen);
+        this.getAnswer = screen.getAnswer.bind(screen);
         onListener(this.choicesContainer, 'click', this.handlerMakeChoice.bind(this));
+    }
+
+    isCurrentAnswerSelected( answer ) {
+        return answer === this.getAnswer();
     }
 
     handlerMakeChoice(event) {
         const selectedCheckbox = event.target.nodeName === 'INPUT' ? event.target : null;
 
         if ( !selectedCheckbox ) return;
-        console.log('fack')
 
-        const isChecked = selectedCheckbox.checked;
         const allCheckboxs = this.choicesContainer.querySelectorAll('.checkbox');
         
         for ( let checkbox of allCheckboxs ) {
             checkbox.checked = false;
         }
-        // if checkbox and answer already selected - cancel otherwise select
-        selectedCheckbox.checked = isChecked ? true : false;
-        // document.querySelector(`[data-answer=${selectedCheckbox.value}]`).click();
+        // if checkbox already selected - cancel otherwise select
+        if ( this.isCurrentAnswerSelected( selectedCheckbox.value ) ) {
+            this.setAnswer( null );
+            selectedCheckbox.checked = false;
+        } else {
+            this.setAnswer( selectedCheckbox.value);
+            selectedCheckbox.checked = true;
+        }
     }
 
     render() {
